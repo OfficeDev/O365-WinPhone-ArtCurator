@@ -1,0 +1,121 @@
+﻿<!-- Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file. -->
+
+<Page
+    x:Class="O365_WinPhone_ArtCurator.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:O365_WinPhone_ArtCurator"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+ 
+    <Page.Resources>
+        <local:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
+    </Page.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock x:Uid="AppName" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock Text="settings" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+        </StackPanel>
+
+        <!-- Content Panel -->
+        <ScrollViewer Grid.Row="1" Margin="19,9.5,19,0">
+            <StackPanel  x:Name="ContentRoot" >
+                <TextBlock x:Uid="NewSubmissionsFolder"
+                           Style="{ThemeResource SubheaderTextBlockStyle}"
+                           Margin="0,0,12,0"
+                           />
+                <TextBox InputScope="Default" 
+                         Text="{Binding TargetFolder, Mode=TwoWay}"
+                         Margin="0,6,12,0"/>
+
+                <TextBlock x:Uid="LikeActions"
+                           Style="{ThemeResource SubheaderTextBlockStyle}" Margin="0,18,0,0"
+                           />
+                <CheckBox x:Uid="MarkAsRead"
+                          IsChecked="{Binding LikeMarkAsRead, Mode=TwoWay}"
+                          />
+                <CheckBox x:Uid="Respond"
+                          IsChecked="{Binding LikeRespond, Mode=TwoWay}"
+                          />
+                <TextBox Text="{Binding LikeResponse, Mode=TwoWay}"
+                         Visibility="{Binding LikeRespond, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="0,0,12,0"
+                         AcceptsReturn="True" 
+                         InputScope="Default"
+                         TextWrapping="Wrap"
+                         Height="150" 
+                         />
+
+                <TextBlock x:Uid="DislikeActions"
+                           Style="{ThemeResource SubheaderTextBlockStyle}" 
+                           Margin="0,18,0,0"
+                           />
+                <CheckBox x:Uid="MarkAsRead"
+                          IsChecked="{Binding DislikeMarkAsRead, Mode=TwoWay}"
+                          />
+                <CheckBox x:Uid="Respond"
+                          IsChecked="{Binding DislikeRespond, Mode=TwoWay}"
+                          />
+                <TextBox Text="{Binding DislikeResponse, Mode=TwoWay}"
+                         Visibility="{Binding DislikeRespond, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="0,0,12,0"
+                         AcceptsReturn="True" 
+                         InputScope="Default"
+                         TextWrapping="Wrap"
+                         Height="150"
+                         />
+
+                <TextBlock x:Uid="Account" Margin="0,12,0,0"
+                           Style="{ThemeResource SubheaderTextBlockStyle}"
+                           />
+                <TextBlock Text="{Binding Email}"
+                           Style="{ThemeResource SubheaderTextBlockStyle}"
+                           FontSize="20"
+                           />
+                <Button x:Uid="SignOutButton"
+                        HorizontalAlignment="Stretch" 
+                        Click="SignOutButton_Click"
+                        />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
+
+<!--
+O365-WinPhone-ArtCurator, https://github.com/OfficeDev/O365-WinPhone-ArtCurator
+Copyright (c) Microsoft Corporation
+All rights reserved. 
+MIT License:
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+""Software""), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
+-->

@@ -1,0 +1,145 @@
+﻿<!-- Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file. -->
+
+<Page
+    x:Class="O365_WinPhone_ArtCurator.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:O365_WinPhone_ArtCurator"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    >
+    
+    <Page.Resources>
+        <local:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
+        <local:AttachmentConverter x:Name="AttachmentConverter" />
+        <DataTemplate x:Name="MessageTemplate">
+            <StackPanel Margin="0,0,12,12" 
+                        Tapped="Attachment_Tapped">
+                <Border Height="100" Width="100" >
+                    <Image x:Name="AttachmentImage"
+                           Source="{Binding Converter={StaticResource AttachmentConverter}}" 
+                           Stretch="UniformToFill"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0,0,0,0"                          
+                           />
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+ 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock x:Uid="AppName" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/> 
+        </StackPanel>
+        
+        <!-- Error UI -->
+        <StackPanel Grid.Row="1" Margin="19,9.5,19,0"
+                    Visibility="{Binding ShowErrorUI, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
+            <TextBlock x:Name="ErrorTextBlock"
+                       Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}"
+                       Style="{ThemeResource BodyTextBlockStyle}"
+                       Margin="0,12,0,0"
+                       />
+            <Button x:Uid="PopulateButton"
+                    IsEnabled="{Binding EnableControl, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding ShowPopulateButton, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" 
+                    Click="PopulateButton_Click"
+                    />
+            <ProgressBar IsIndeterminate="True" 
+                         Height="70" 
+                         Visibility="{Binding IsWaiting, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                         />
+            <TextBlock x:Uid="SubmissionsSentMessage"
+                       x:Name="SubmissionsSentMessage"
+                       Style="{ThemeResource BodyTextBlockStyle}"
+                       TextWrapping="Wrap"
+                       Visibility="Collapsed"
+                       />
+        </StackPanel>
+
+        <!-- Connect UI -->
+        <StackPanel Grid.Row="1" Margin="19,9.5,19,0"
+                    Visibility="{Binding ShowConnectUI, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
+            <TextBlock x:Uid="WelcomeMessage"
+                       Style="{ThemeResource BodyTextBlockStyle}"
+                       TextWrapping="Wrap"
+                       Margin="0,12,0,0"
+                       />
+            <Button x:Uid="ConnectButton" 
+                    Click="ConnectButton_Click" 
+                    />
+        </StackPanel>
+        
+        <!-- Content Panel -->
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0"
+              Visibility="{Binding ShowMailUI, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
+            <ScrollViewer>
+                <ItemsControl x:Name="EmailsControl"
+                              ItemsSource="{Binding Messages}"
+                              ItemTemplate="{StaticResource MessageTemplate}"
+                              >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <ProgressBar IsIndeterminate="True" 
+                         Height="70" 
+                         Visibility="{Binding IsWaiting, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                         />
+        </Grid>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar x:Name="myAppBar" Visibility="{Binding ShowAppBar, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
+            <AppBarButton x:Name="RefreshButton" Label="refresh" Icon="Refresh" Click="RefreshButton_Click"
+                          IsEnabled="{Binding EnableControl, UpdateSourceTrigger=PropertyChanged}"
+                          />
+            <AppBarButton x:Name="SettingsButton" Label="settings" Icon="Setting" Click="SettingsButton_Click"
+                          IsEnabled="{Binding EnableControl, UpdateSourceTrigger=PropertyChanged}"
+                          />
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
+
+<!--
+O365-WinPhone-ArtCurator, https://github.com/OfficeDev/O365-WinPhone-ArtCurator
+Copyright (c) Microsoft Corporation
+All rights reserved. 
+MIT License:
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+""Software""), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
+-->
