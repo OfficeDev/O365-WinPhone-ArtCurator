@@ -65,7 +65,8 @@ The following features are not included in the current version.
 * File support beyond .png and .jpg
 * Handling a single email with multiple attachments
 * Paging (getting more than 50 emails)
-* Handling folder name uniqueness  
+* Handling folder name uniqueness
+* Submission folder must be a top-level folder  
 
 <a name="questions-and-comments"></a>
 ## Questions and comments
