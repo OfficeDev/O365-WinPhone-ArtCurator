@@ -18,10 +18,11 @@ This sample demonstrates the following operations from the **Outlook Mail API**:
 
 This sample requires the following:  
 
-  - Windows 8.1.  
-  - Visual Studio 2013 with Update 3.  
-  - [Office 365 API Tools version 1.3.41104.1](http://aka.ms/k0534n).  
-  - An [Office 365 developer site](http://aka.ms/ro9c62).  
+  - Windows 8.1
+  - Visual Studio 2013 with Update 3
+  - [Office 365 API Tools version 1.4.50428.2](http://aka.ms/k0534n)
+  - An [Office 365 developer site](http://aka.ms/ro9c62)
+  - A [Windows App Developer account](https://appdev.microsoft.com/StorePortals/en-us/Account/signup/start)
 
 ### Configure the sample
 
@@ -39,7 +40,7 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
 
    1. In the Solution Explorer window, choose **O365-Windows-Phone-Art-Curator** project -> Add -> Connected Service.
    2. A Services Manager dialog box will appear. Choose Office 365 and Register your app.
-   3. On the sign-in dialog box, enter the username and password for your Office 365 tenant. We recommend that you use your Office 365 Developer Site. Often, this user name will follow the pattern <your-name>@<tenant-name>.onmicrosoft.com. If you do not have a developer site, you can get a free Developer Site as part of your MSDN Benefits or sign up for a free trial. Be aware that the user must be an Tenant Admin user, but for tenants created as part of an Office 365 Developer Site, this is likely to be the case already. Also developer accounts are usually limited to one sign-in.
+   3. On the sign-in dialog box, enter the username and password for your Office 365 tenant. We recommend that you use your Office 365 Developer Site. Often, this user name will follow the pattern {username}@{tenant}.onmicrosoft.com. If you do not have a developer site, you can get a free Developer Site as part of your MSDN Benefits or sign up for a free trial. Be aware that the user must be an Tenant Admin user, but for tenants created as part of an Office 365 Developer Site, this is likely to be the case already. Also developer accounts are usually limited to one sign-in.
    4. After you're signed in, you will see a list of all the services. Initially, no permissions will be selected, as the app is not registered to consume any services yet. 
    5. To register for the services used in this sample, choose the following permissions:  
       * (Mail) - *Send mail as a user*
@@ -53,10 +54,6 @@ After you've loaded the solution in Visual Studio, press F5 to build and deploy.
 
 <a name="understand"></a>
 ## Understand the code
-
-### Files of interest
-   - AuthenticationHelper.cs  
-   - MailHelper.cs
    
 ### Limitations
 
