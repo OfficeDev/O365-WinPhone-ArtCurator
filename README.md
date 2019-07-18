@@ -1,10 +1,10 @@
 ---
 topic: sample
 products:
-- Outlook
-- Office 365
+- office-outlook
+- office-365
 languages:
-- C#
+- csharp
 extensions:
   contentType: samples
   createdDate: 6/26/2015 3:03:02 PM
